@@ -21,5 +21,6 @@ printf("Admission Not Granted");
 }
 else
 printf("Data Invalid");
+  getch();
 }
 
