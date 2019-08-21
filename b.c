@@ -1,4 +1,4 @@
-#include<stdio.h>
+##include<stdio.h>
 int pre(char c)
 {
 if(c=='/'||c=='*')
@@ -19,7 +19,8 @@ s[*t]=c;
 }
 }
 char pop(char s[100],int *t)
-{char e;
+{
+	char e;
 if(*t==-1)
 {
 printf("SE");
@@ -52,13 +53,25 @@ int top=-1;
 int n;
 char a,m;
 int k;
-printf("Enter length");
 scanf("%d",&n);
-for(int i=0;i<n+1;i++)
+for(int i=0;i<n;i++)
 {
 scanf("%c",&st[i]);
 if(st[i]>=97&&st[i]<123)
 printf("%c",st[i]);
+else if(st[i]=='(')
+push(s,&top,st[i]);
+else if(st[i]==')')
+{
+	k=top;
+	if(s[k]!='(' && top>=0)
+		{
+a=pop(s,&top);
+printf("%c",a);
+}
+else
+break;
+}
 else if(pre(st[i])>pre(s[top])||top==-1||s[top]=='(')
 push(s,&top,st[i]);
 else if(pre(st[i])<pre(s[top]))
@@ -70,17 +83,8 @@ printf("%c",m);
 }
 push(s,&top,st[i]);
 }
-else if(st[i]=='(')
-push(s,&top,st[i]);
-else if(st[i]==')')
-{
-k=top;
-for(;s[k]!='(';k--)
-{
-a=pop(s,&top);
-printf("%c",a);
-}
-}
+
+
 else
 continue;
 }
