@@ -53,6 +53,7 @@ int top=-1;
 int n;
 char a,m;
 int k;
+printf("enter length)
 scanf("%d",&n);
 for(int i=0;i<n;i++)
 {
