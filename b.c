@@ -1,4 +1,4 @@
-##include<stdio.h>
+#include<stdio.h>
 int pre(char c)
 {
 if(c=='/'||c=='*')
