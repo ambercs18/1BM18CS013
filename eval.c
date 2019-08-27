@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<string.h>
+#include<math.h>
 void push(int s[100],int *t,int a)
 {
 if(*t==99)
@@ -41,6 +41,9 @@ break;
 case '/':
 return a/b;
 break;
+  case '^':
+    return (pow(a,b));
+    break;
 }
 }
 void main()
