@@ -20,40 +20,70 @@ Node insertfront(int e,Node head)
     head=p;
     return head;
 }
+void insertend(Node head,int item)
+{
+    Node p,q;
+    q=getnode();
+    q->data=item;
+    p=head;
+    while(p->next!=NULL)
+    {
+       p=p->next;
+       }
+    p->next=q;
+    q->next=NULL;
+}
 void show(Node head)
 {
     Node p=head;
     while(p!=NULL)
     {
-        printf("%d ",p->data);
+        printf("%d\n",p->data);
         p=p->next;
     }
 }
 Node insert(Node head,int e,int pos)
 {
-    int c=0;
-    Node p,q;
+    int c=1;
+    Node p,q,r;
     q=getnode();
-    if(pos==1)
+    q->data=e;
+    if(head==NULL)
     {
-    insertfront(e,head);
-    return head;
-    }
+       if(pos==1)
+       return q;
     else
     {
-    p=head;
-        while((pos-2)!=c)
-        {
-            c++;
-            p=p->next;    
-        }
-q->data=e;
-        q->next=p->next;
-        p->next=q;
-        return head;
+       printf("Inalid Position \n");
+       return head;
+     }
     }
-    
-}
+    if(pos==1)
+    {
+       q->next=head;
+       head=q;
+       return head;
+     }
+    else{
+         r=head;
+         while(r!=NULL && c!=pos)
+         {
+            p=r;
+            r=r->next;
+            c++;
+         }
+        if(c==pos)
+        {
+          p->next=q;
+          q->next=r;
+          return head;
+        }
+        else{
+             printf("Invalid Position\n");
+             return head;
+             }
+         }  
+         }  
 Node insertval(Node head,int val,int e)
 {
     Node p,q,r;
@@ -88,17 +118,41 @@ Node insertval(Node head,int val,int e)
     printf("Value not present");
     return head;
     }
-}
-
+ }
 int main()
 {
     Node head;
     head=NULL;
-    head=insertfront(10,head);
-head=insertfront(20,head);
-head=insertfront(30,head);
-head=insert(head,40,2);
-head=insertval(head,30,1000);
-    show(head);
-    return 0;
+    int ch,ch1,e,p;
+    do{
+        printf("Enter 1 to add node at front\nEnter 2 to add node at end\nEnter 3 to add node at any position\nEnter 4 to display\n");
+        scanf("%d",&ch); 
+        switch(ch)
+        {
+           case 1:
+   
+                  printf("Enter element to be inserted \n");
+                  scanf("%d",&e);
+                  head=insertfront(e,head);
+                  break;
+           case 2:
+           
+           printf("Enter element to be inserted\n");
+           scanf("%d",&e);
+           insertend(head,e);
+           break;
+           case 3:
+            
+           printf("Enter element to be inserted and position\n");
+           scanf("%d%d",&e,&p);
+           head=insert(head,e,p);
+           break;
+           case 4:
+           show(head);
+           break;
+           }
+           printf("Enter 1 to continue and 0 to exit\n");
+           scanf("%d",&ch1);
+           }while(ch1!=0);
+   return 0;
 }
