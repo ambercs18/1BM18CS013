@@ -36,10 +36,15 @@ void insertend(Node head,int item)
 void show(Node head)
 {
     Node p=head;
+    if(p==NULL)
+    printf("List is empty\n");
+    else
+    {
     while(p!=NULL)
     {
         printf("%d\n",p->data);
         p=p->next;
+    }
     }
 }
 Node insert(Node head,int e,int pos)
@@ -119,13 +124,85 @@ Node insertval(Node head,int val,int e)
     return head;
     }
  }
+Node delfront(Node head)
+{  
+    Node p=head;
+    if(head==NULL)
+    {
+      printf("List is Empty \n");
+      return head;
+     }
+    printf("Deleted element is = %d \n",p->data);
+    head=head->next;
+    free(p);
+    return head;
+}
+void delend(Node head)
+{
+   Node p,r;
+   p=head;
+   if(head==NULL)
+   printf("List is Empty \n");
+   else
+   {
+   while(p->next!=NULL)
+   {
+     r=p;
+     p=p->next;
+   }
+   printf("Deleted element is = %d",p->data);
+   r->next=NULL;
+   free(p);
+   }
+}
+Node delval(Node head,int val)
+{
+   Node p,r;
+   int f;
+   p=head;
+   if(head==NULL)
+   {
+     printf("List is Empty \n");
+     return head;
+   }
+   else if(head->data==val)
+   {
+      head=delfront(head);
+      return head;
+   }
+   else
+   {
+     while(p!=NULL)
+     {
+       if(p->data==val)
+       {
+         f=1;
+         break;
+       }
+       r=p;
+       p=p->next;
+     }
+    }
+     if(f==1)
+     {
+     printf("Deleted element is = %d\n",p->data);
+     r->next=p->next;
+     free(p);
+     return head;
+     }
+     else
+     {
+     printf("Element not found\n");
+     return head;
+     }
+}      
 int main()
 {
     Node head;
     head=NULL;
-    int ch,ch1,e,p;
+    int ch,ch1,e,p,v;
     do{
-        printf("Enter 1 to add node at front\nEnter 2 to add node at end\nEnter 3 to add node at any position\nEnter 4 to display\n");
+        printf("Enter 1 to add node at front\nEnter 2 to add node at end\nEnter 3 to add node at any position\nEnter 4 delete the front element\nEnter 5 to delete last element\nEnter 6 to delete a value\nEnter 7 to display\n");
         scanf("%d",&ch); 
         switch(ch)
         {
@@ -148,6 +225,17 @@ int main()
            head=insert(head,e,p);
            break;
            case 4:
+                  head=delfront(head);
+                  break;
+           case 5:
+                  delend(head);
+                  break; 
+           case 6:
+                  printf("Enter value to be deleted\n");
+                  scanf("%d",&v);
+                  head=delval(head,v);
+                  break; 
+           case 7:
            show(head);
            break;
            }
